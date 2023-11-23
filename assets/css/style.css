@@ -1,0 +1,212 @@
+.cabecera{
+    height: 45px;
+    background-color: #9a3cdd;
+}
+
+.seccion1{
+    background-image: url(../img/textura2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 150px;
+}
+
+/* Definición de la animación */
+@keyframes girar {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Aplicación de la animación a la imagen */
+.logoCabecera {
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 0px;
+    border: 3px solid white;
+    /*animation: girar 1s linear; /* Duración y efecto de la animación */
+}
+.animacion {
+    animation: girar 1s linear;
+}
+
+.tit{
+    font-size: 19px;
+    padding-top: 10px;
+    color: white;
+}
+
+
+
+
+
+.iconoCuerpo {
+    color: white; 
+    background-color: #660099;
+    padding-top: 14px;
+    border-radius: 50%; /* Cambiamos el valor a 50% para hacer un círculo */
+    font-size: 25px;
+    width: 55px; /* Establecemos el ancho y el alto iguales */
+    height: 55px;
+    text-align: center; /* Opcional: centraremos el contenido del círculo */
+    line-height: 100px; /* Opcional: centraremos verticalmente el contenido */
+    box-shadow: 3px 2px 9px rgba(0, 0, 0, 0.7);
+    
+}
+
+.textIcono{
+    font-weight: 700;
+    color: #9a3cdd;
+    font-size: 13px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+}
+
+footer{
+    background-color: #434344;
+    height: 45px;
+    margin-top: 5px;
+    padding-top: 8px;
+    margin-bottom: 10px;
+}
+
+.footerEstrella{
+    color: white;
+    font-size: 23px;
+}
+
+.footerCompartir{
+    color: white;
+    font-size: 23px;
+    padding-right: 10px;
+}
+
+span{
+    color: white;
+    padding-right: 3px;
+    font-size: 15px;
+    
+}
+
+
+
+
+.iconfot{
+    color:white;
+    font-size: 29px;
+    margin-right: 4px;
+    position: relative;
+    z-index: 2;
+    
+}
+.iconfot1{
+    color:white;
+    font-size: 29px;
+    margin-right: -2px;
+    position: relative;
+    z-index: 2;
+    
+}
+
+#redesSocialesIcons{
+    margin-right: 0px;
+    margin-top: -85px;
+    font-size: 28px;
+}
+
+
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporción 16:9 */
+    padding-top: 30px; /* Opcional, para dar espacio encima del video */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.boton-verde{
+    text-decoration: none;
+    background-color:#eb668b;
+    
+    color: white;
+    font-size: 15px;
+    padding: 8px 20px;
+    border-radius: 7px;
+    box-shadow: 3px 2px 9px rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+    
+   
+}
+
+.grupow{
+    padding-left: 5px;
+    font-size: 20px;
+   
+}
+
+
+.qr{
+   width: 170px !important;
+
+   display: block;
+   z-index: 2;
+}
+
+.linea{
+    width: 100%;
+    color: #eb668b;
+    border-width: 20px; 
+    margin-top: -150px !important;
+    display: block;
+    z-index: 0;
+    
+}
+
+.nuestrologo {
+    width: 70px !important;
+    margin-left: auto; /* Alinea la imagen a la derecha */
+    display: block; /* Evita que la imagen se superponga a otras */
+    margin-top: -40px !important;
+}
+
+
+/* Estilos para el banner de instalación */
+#install-banner {
+    width: 100%;
+    background-color: #434344;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    z-index: 1000;
+  }
+  #install-button {
+    background-color: white;
+    color: rgb(255, 0, 212);
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+@media (min-width: 1000px) {
+    body{
+        padding: 0 250px 0 250px;
+    }
+}
+
+@media (orientation: landscape) {
+    body{
+        padding: 0 200px 0 200px;
+    }
+}
