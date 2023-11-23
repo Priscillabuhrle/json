@@ -89,29 +89,92 @@ logoImage.addEventListener('click', () => {
 //json - manifesto para instalacion
 let deferredPrompt;
 
-        window.addEventListener('beforeinstallprompt', (event) => {
-            // Previene que el navegador muestre su propio mensaje de instalación
-            event.preventDefault();
-            // Guarda el evento para mostrar el banner cuando sea apropiado
-            deferredPrompt = event;
-        });
+window.addEventListener('beforeinstallprompt', (event) => {
+    // Previene que el navegador muestre su propio mensaje de instalación
+    event.preventDefault();
+    // Guarda el evento para mostrar el banner cuando sea apropiado
+    deferredPrompt = event;
+});
 
-        // Asocia el evento de clic al botón de instalación
-        document.getElementById('install-button').addEventListener('click', () => {
-            // Llama directamente al método prompt() para mostrar el diálogo de instalación
-            deferredPrompt.prompt();
-
-            // Espera a que el usuario haga una elección
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('Usuario aceptó la instalación');
-                } else {
-                    console.log('Usuario rechazó la instalación');
-                }
-                // Limpia el evento
-                deferredPrompt = null;
-                // Oculta el banner después de la interacción
-                document.getElementById('install-banner').style.display = 'none';
-            });
+// Asocia el evento de clic al botón de instalación
+document.getElementById('install-button').addEventListener('click', () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Usuario aceptó la instalación');
+            } else {
+                console.log('Usuario rechazó la instalación');
+            }
+            deferredPrompt = null;
+            document.getElementById('install-banner').style.display = 'none';
         });
+    }
+});
+
+
+
+
+// service-worker.js
+
+// Asigna un nombre a tu caché
+const CACHE_NAME = 'paudisenos-cache-v1';
+
+// Lista de archivos a cachear
+const cacheUrls = [
+    './', // Raíz del sitio
+    './index.html',
+    './assets/css/style.css',
+    './assets/img/logo.jpg',
+    './assets/img/nuestrologo.png',
+    './assets/img/qr-tarjeta.png',
+    './assets/img/textura2.png',
+    './assets/js/script.js',
+    './manifest.json',
+    // ... añade aquí todos los archivos que deseas cachear
+];
+
+// Instalación del Service Worker
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then((cache) => cache.addAll(cacheUrls))
+    );
+});
+
+// Activación del Service Worker
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys()
+            .then((cacheNames) => {
+                return Promise.all(
+                    cacheNames.map((name) => {
+                        if (name !== CACHE_NAME) {
+                            return caches.delete(name);
+                        }
+                    })
+                );
+            })
+    );
+});
+
+// Intercepción de las solicitudes y manejo de la caché
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request)
+            .then((response) => response || fetch(event.request))
+    );
+});
+
+
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./assets/js/script.js')
+        .then((registration) => {
+            console.log('Service Worker registrado con éxito:', registration);
+        })
+        .catch((error) => {
+            console.error('Error al registrar el Service Worker:', error);
+        });
+}
 
